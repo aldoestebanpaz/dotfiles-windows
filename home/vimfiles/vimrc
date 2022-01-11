@@ -1,0 +1,187 @@
+"" Basic UI components
+"" ----------------
+
+" Show the line and column number of the cursor position, separated by a comma.
+" tags -- 'ruler'
+set ruler
+
+" On pressing <Tab> to invoke completion, the possible matches are shown just above the command line,
+" tags -- 'wildmenu'
+set wildmenu
+
+" Print the line number in front of each line.
+" tags -- 'number'
+set number
+
+" Disable beeping and screen flashing
+" Source: https://vim.fandom.com/wiki/Disable_beeping
+" tags -- 'errorbells' 'visualbell'
+set noerrorbells
+set novisualbell
+
+
+"" Basic behavior
+"" ----------------
+
+" Sets the character encoding used inside Vim.  It applies to text in
+" the buffers, registers, Strings in expressions, text stored in the
+" viminfo file, etc.  It sets the kind of characters which Vim can work with.
+" tags -- 'encoding'
+set encoding=utf8
+
+" Make the <BS> work like in most other programs
+" Source: https://vi.stackexchange.com/questions/2162/why-doesnt-the-backspace-key-work-in-insert-mode
+set backspace=indent,eol,start
+
+" Cause the left and right arrow keys, as well as h and l, to wrap when used at beginning or end of lines.
+" [ ] are the cursor keys in insert mode.
+" Source: https://vim.fandom.com/wiki/Automatically_wrap_left_and_right
+set whichwrap+=<,>,h,l,[,]
+
+" Lines longer than the width of the window will wrap and displaying continues on the next line.
+" tags -- 'wrap'
+set wrap
+
+" While typing a search command, show where the pattern, as it was typed so far, matches.
+" tags -- 'incsearch'
+set incsearch
+
+" Highlight matches for a search pattern
+" tags -- 'hlsearch' 'hls'
+set hlsearch
+
+" No backup files
+" Source: https://vim.fandom.com/wiki/Remove_swap_and_backup_files_from_your_working_directory
+set nobackup
+set nowritebackup
+set noswapfile
+
+" Change tabs to spaces
+" Source: https://vim.fandom.com/wiki/Converting_tabs_to_spaces
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+" Autoindent
+" Source: https://vim.fandom.com/wiki/Indenting_source_code
+set autoindent
+
+
+"" Check changes from outside
+"" ----------------
+
+" When a file has been detected to have been changed outside of Vim and
+"   it has not been changed inside of Vim, automatically read it again.
+" tags -- 'autoread'
+set autoread
+
+" Check if any buffers were changed outside of Vim and trigger 'autoread'.
+" This checks and warns you if you would end up with two versions of a file.
+" Source: https://vim.fandom.com/wiki/Have_Vim_check_automatically_if_the_file_has_changed_externally
+" tags -- :autocmd :checktime
+autocmd FocusGained,BufEnter * checktime
+
+
+
+"" Language specific plugins and indentation
+"" ----------------
+
+" Enable loading the indent file for specific file types.
+" tags -- :filetype-indent-on
+filetype indent on
+
+" Enable loading the plugin files for specific file types.
+" tags -- :filetype-plugin-on filetype-plugins
+filetype plugin on
+
+
+
+"" Pluggins to install
+"" Plugin Manager: vim-plug (https://github.com/junegunn/vim-plug)
+"" ----------------
+call plug#begin('~/.vim/plugged')
+
+" NERDTree (https://github.com/preservim/nerdtree)
+" A tree explorer plugin for vim.
+Plug 'preservim/nerdtree'
+
+" fzf (https://github.com/junegunn/fzf.vim) - fzf and Vim.
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" vim-ripgrep (https://github.com/jremmen/vim-ripgrep)
+" Use RipGrep in Vim and display results in a quickfix list.
+Plug 'jremmen/vim-ripgrep'
+
+" vim-gitgutter (https://github.com/airblade/vim-gitgutter/)
+" Shows a git diff in the sign column. It shows which lines have been added, modified, or removed.
+" Plug 'airblade/vim-gitgutter', { 'on':  'GitGutterEnable' }
+
+" vim-signify (https://github.com/mhinz/vim-signify)
+" Show a diff using Vim its sign column.
+Plug 'mhinz/vim-signify'
+
+" ALE (Asynchronous Lint Engine) (https://github.com/dense-analysis/ale)
+" Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support.
+Plug 'dense-analysis/ale'
+
+" vim-airline (https://github.com/vim-airline/vim-airline)
+" Nice statusline at the bottom of each vim window.
+Plug 'vim-airline/vim-airline'
+
+" vim-code-dark (https://github.com/tomasiser/vim-code-dark)
+" Dark color scheme for Vim and vim-airline, inspired by Dark+ in Visual Studio Code.
+Plug 'tomasiser/vim-code-dark'
+
+call plug#end()
+
+
+
+"" Special configurations
+"" ----------------
+" default updatetime 4000ms is not good for async update
+set updatetime=100
+" let g:gitgutter_git_executable = 'C:\Program Files\Git\cmd\git.exe'
+" let g:gitgutter_async=0
+
+
+"" Colorscheme
+"" ----------------
+if exists("+termguicolors")
+    set termguicolors
+    " The commands below are needed for tmux + termguicolors
+    " This is only necessary if you use "set termguicolors".
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+    set background=dark
+
+    set t_Co=256
+    colorscheme codedark
+    let g:airline_theme = 'codedark'
+endif
+
+
+"" Language specific settings
+"" ----------------
+
+" Enable syntax highlighting
+" tags -- :syntax-on
+syntax on
+
+
+
+"" Commands
+"" ----------------
+
+" ":W" for su-write
+" Source 1: https://vim.fandom.com/wiki/Su-write
+" Source 2: https://stackoverflow.com/questions/2600783/how-does-the-vim-write-with-sudo-trick-work
+command W w !sudo tee "%" > /dev/null
+" cnoremap W execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+" make NERDTree easier to toggle
+nmap <leader>n :NERDTreeToggle<CR>
+
+" make GitGutter easier to toggle
+" nmap <Leader>g :GitGutterToggle<cr>

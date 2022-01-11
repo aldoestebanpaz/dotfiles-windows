@@ -1,0 +1,19 @@
+{
+    "editor.fontFamily": "Fira Code Retina",
+    "editor.fontWeight": "450",
+    "editor.fontLigatures": true,
+    "editor.rulers": [
+        {
+            "column": 80,
+            "color": "#ff88003b"
+        },
+        {
+            "column": 100,
+            "color": "#ff88003b"
+        },
+        {
+            "column": 120,
+            "color": "#ff88003b"
+        },
+    ]
+}

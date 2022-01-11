@@ -1,0 +1,52 @@
+# Reference: https://git-scm.com/docs/git-config
+
+[core]
+    editor = vim
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+
+[color]
+    # Use colors in Git commands that are capable of colored output when
+    # outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+    ui = auto
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+    branch = magenta
+
+[delta]
+    features = decorations
+    navigate = true
+    line-numbers = true
+    side-by-side = true
+
+[delta "decorations"]
+    # commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = yellow box
+    hunk-header-decoration-style = white ul
+    line-numbers-minus-style = blue bold bold black
+    line-numbers-zero-style = blue bold bold black
+    line-numbers-plus-style = blue bold bold black
+    line-numbers-left-format = "{nm:>4} "
+    line-numbers-right-format = " {np:>4} "
+    line-numbers-left-style = darkslategray
+    line-numbers-right-style = darkslategray
