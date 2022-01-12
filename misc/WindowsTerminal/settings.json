@@ -23,10 +23,11 @@
     "profiles":
     {
         "defaults": {
-            "useAcrylic": true,
+            "padding": "8",
+            "useAcrylic": false,
             "acrylicOpacity": 0.2,
             "colorScheme": "Breeze",
-            "backgroundImage": "%USERPROFILE%/Pictures/terminal-background.jpg",
+            "backgroundImage": null,
             "backgroundImageOpacity": 0.7,
             "font":
             {
@@ -64,7 +65,7 @@
     "schemes":
     [
         {
-            "background": "#31363B",
+            "background": "#1E1E1E",
             "black": "#31363B",
             "blue": "#1D99F3",
             "brightBlack": "#7F8C8D",

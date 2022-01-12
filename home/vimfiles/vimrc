@@ -109,17 +109,13 @@ Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-" vim-ripgrep (https://github.com/jremmen/vim-ripgrep)
-" Use RipGrep in Vim and display results in a quickfix list.
-Plug 'jremmen/vim-ripgrep'
-
-" vim-gitgutter (https://github.com/airblade/vim-gitgutter/)
-" Shows a git diff in the sign column. It shows which lines have been added, modified, or removed.
-" Plug 'airblade/vim-gitgutter', { 'on':  'GitGutterEnable' }
-
 " vim-signify (https://github.com/mhinz/vim-signify)
 " Show a diff using Vim its sign column.
 Plug 'mhinz/vim-signify'
+
+" fugitive.vim (https://github.com/tpope/vim-fugitive)
+" :Git (or just :G), which calls any arbitrary Git command.
+Plug 'tpope/vim-fugitive'
 
 " ALE (Asynchronous Lint Engine) (https://github.com/dense-analysis/ale)
 " Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support.
@@ -141,24 +137,31 @@ call plug#end()
 "" ----------------
 " default updatetime 4000ms is not good for async update
 set updatetime=100
-" let g:gitgutter_git_executable = 'C:\Program Files\Git\cmd\git.exe'
-" let g:gitgutter_async=0
+" open NERDTree when no file argument provided
+autocmd vimenter * if !argc() | NERDTree | endif
+" Automatically close NERDtree when opening file
+let g:NERDTreeQuitOnOpen = 1
+" display a tab line at the top containing the name of all open tabs or buffers.
+let g:airline#extensions#tabline#enabled = 1
 
 
 "" Colorscheme
 "" ----------------
 if exists("+termguicolors")
     set termguicolors
-    " The commands below are needed for tmux + termguicolors
-    " This is only necessary if you use "set termguicolors".
+    " Sometimes setting 'termguicolors' is not enough and one has to set the t_8f and t_8b options explicitly.
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-    set background=dark
-
-    set t_Co=256
     colorscheme codedark
     let g:airline_theme = 'codedark'
+endif
+
+"" fix: Vim background color renders incorrectly
+"" Source: https://github.com/microsoft/terminal/issues/832
+if (&term =~ '^xterm' && &t_Co == 256)
+  set &t_ut=
+  set &ttyscroll=1
 endif
 
 
@@ -174,14 +177,60 @@ syntax on
 "" Commands
 "" ----------------
 
-" ":W" for su-write
+" Select all file content in normal-mode
+nnoremap <C-a> ggVG
+
+" Linux - ":W" for su-write
 " Source 1: https://vim.fandom.com/wiki/Su-write
 " Source 2: https://stackoverflow.com/questions/2600783/how-does-the-vim-write-with-sudo-trick-work
-command W w !sudo tee "%" > /dev/null
+" command W w !sudo tee "%" > /dev/null
 " cnoremap W execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
-" make NERDTree easier to toggle
+" "123<CR>" will jump to 123 in normal-mode
+" Source: https://vim.fandom.com/wiki/Jump_to_a_line_number
+:nnoremap <CR> G
+:nmap <kEnter> <Enter>
+
+" Clipboard accesing mapping
+" Source: https://vim.fandom.com/wiki/Accessing_the_system_clipboard
+" "C-c" in visual-mode will copy content in clipboard
+" :vnoremap <C-c> "+y
+" "C-x" in visual-mode will cut content in clipboard
+" :vnoremap <C-x> "+d
+" "C-v" in insert-mode will paste content from clipboard
+":inoremap <C-v> <ESC>"+pa
+
+" maps CTRL-X, CTRL-C, CTRL-V and CTRL-Z like in Windows.
+" tags -- mxwin.vim
+source $VIMRUNTIME/mswin.vim
+
+" "C-s" for saving changes; this works in Windows Terminal at least.
+" Ctrl-S is a common command to terminals to stop updating, it was a way to slow
+" the output so you could read it on terminals that didn't have a scrollback
+" buffer. First find out if you can configure your xterm to pass Ctrl-S through
+" to the application. Then these map commands will work
+" Source: https://stackoverflow.com/questions/3446320/in-vim-how-to-map-save-to-ctrl-s
+noremap <silent> <C-s>   :w<CR>
+vnoremap <silent> <C-s>  <Esc>:w<CR> \| :execute "normal! gv"<CR>
+inoremap <silent> <C-s>  <C-o>:w<CR> " i_CTRL-O execute one command, return to Insert mode
+
+" "\q" exit (closing everything) discarding changes
+nmap <leader>q <Esc>:qa!<CR>
+
+" Go to tab by number
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+
+" "\n" toggle NERDTree panel
 nmap <leader>n :NERDTreeToggle<CR>
 
-" make GitGutter easier to toggle
-" nmap <Leader>g :GitGutterToggle<cr>
+" "\f" toggle fzf panel for opening a file in another tab
+nmap <leader>f :NERDTreeClose \| :Files<CR>

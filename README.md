@@ -104,7 +104,6 @@ Reference: https://github.com/dandavison/delta
 ## TODOS
 
 - Install and configure .NET SDK, Java SE (JDK), maven, MSYS2, Ruby, perl, vim or neovim or gvim.
-- Install vim plugins and configurations. (navigating to a symbol's definition, syntax highlighting, and error and warning markers (syntax checker or linter?))
 
 ## References
 

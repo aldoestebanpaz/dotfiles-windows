@@ -1,5 +1,8 @@
 # Temporary directory that stores all stuff that is downloaded
 temp
 
+# Created by nvm
+package-lock.json
+
 # The Extras file is secret.
 ps-profile/extra.ps1
