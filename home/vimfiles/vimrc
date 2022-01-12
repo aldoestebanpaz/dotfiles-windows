@@ -109,6 +109,10 @@ Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" Vim Better Whitespace (https://github.com/ntpeters/vim-better-whitespace)
+" Causes all trailing whitespace characters to be highlighted.
+Plug 'ntpeters/vim-better-whitespace'
+
 " vim-signify (https://github.com/mhinz/vim-signify)
 " Show a diff using Vim its sign column.
 Plug 'mhinz/vim-signify'
@@ -128,6 +132,14 @@ Plug 'vim-airline/vim-airline'
 " vim-code-dark (https://github.com/tomasiser/vim-code-dark)
 " Dark color scheme for Vim and vim-airline, inspired by Dark+ in Visual Studio Code.
 Plug 'tomasiser/vim-code-dark'
+
+" vim-devicons (https://github.com/ryanoasis/vim-devicons)
+" Adds file type icons to Vim plugins such as: NERDTree, vim-airline, CtrlP, unite, Denite, lightline, vim-startify and many more
+Plug 'ryanoasis/vim-devicons'
+
+" vim-markdown-toc (https://github.com/mzlogin/vim-markdown-toc)
+" To generate table of contents for Markdown files.
+Plug 'mzlogin/vim-markdown-toc'
 
 call plug#end()
 
@@ -214,8 +226,29 @@ noremap <silent> <C-s>   :w<CR>
 vnoremap <silent> <C-s>  <Esc>:w<CR> \| :execute "normal! gv"<CR>
 inoremap <silent> <C-s>  <C-o>:w<CR> " i_CTRL-O execute one command, return to Insert mode
 
-" "\q" exit (closing everything) discarding changes
-nmap <leader>q <Esc>:qa!<CR>
+" "C-n" for opening new tab
+noremap <C-n> :NERDTreeClose \| :tabnew \| :Files<CR>
+
+" "C-w" for closing a tab and the buffer
+noremap <C-w> :bd<CR>
+
+" "C-b" for switching buffers
+noremap <C-b> :bn<CR>
+
+" "A-b" for switching buffers in reverse order
+noremap <A-b> :bp<CR>
+
+" "C-t" for switching tabs
+noremap <C-t> :tabn<CR>
+
+" "A-t" for switching tabs in reverse order
+noremap <A-t> :tabp<CR>
+
+" "\q" exit discarding changes
+nmap <leader>q <Esc>:q!<CR>
+
+" "\qa" exit closing everything and discarding changes
+nmap <leader>qa <Esc>:qa!<CR>
 
 " Go to tab by number
 noremap <leader>1 1gt
@@ -230,7 +263,18 @@ noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
 
 " "\n" toggle NERDTree panel
-nmap <leader>n :NERDTreeToggle<CR>
+noremap <leader>n :NERDTreeToggle<CR>
 
-" "\f" toggle fzf panel for opening a file in another tab
-nmap <leader>f :NERDTreeClose \| :Files<CR>
+" "\f" toggle fzf panel for opening a new buffer/file
+noremap <leader>f :NERDTreeClose \| :Files<CR>
+
+" Mapping fugitive commands
+noremap <leader>gb :Gblame<CR>
+noremap <leader>gs :Git<CR>
+noremap <leader>gd :Gdiff<CR>
+noremap <leader>gl :Glog<CR>
+noremap <leader>gc :Gcommit<CR>
+noremap <leader>gp :Git push<CR>
+
+noremap <leader>toc :GenTocGFM<CR>
+

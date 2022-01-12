@@ -2,6 +2,18 @@
 
 Here are the configuration files of my Windows working environment.
 
+* [Installation](#installation)
+    * [Install requirements and updates for Windows PowerShell](#install-requirements-and-updates-for-windows-powershell)
+    * [Install the Dracula color scheme](#install-the-dracula-color-scheme)
+    * [Install the PowerShell profile](#install-the-powershell-profile)
+    * [Install home configuration files](#install-home-configuration-files)
+    * [Configure some Windows defaults](#configure-some-windows-defaults)
+    * [Install the tools](#install-the-tools)
+* [Miscellaneous files](#miscellaneous-files)
+* [delta configurations for better diffs](#delta-configurations-for-better-diffs)
+* [TODOS](#todos)
+* [References](#references)
+
 ## Installation
 
 NOTE: For all the installations listed bellow, you need to open a Powershell terminal as Administrator.
