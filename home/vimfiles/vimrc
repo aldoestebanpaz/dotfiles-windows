@@ -13,6 +13,9 @@ set wildmenu
 " tags -- 'number'
 set number
 
+" Characters to display when 'list' option is activated
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<,space:·
+
 " Disable beeping and screen flashing
 " Source: https://vim.fandom.com/wiki/Disable_beeping
 " tags -- 'errorbells' 'visualbell'
@@ -197,6 +200,9 @@ syntax on
 " Select all file content in normal-mode
 nnoremap <C-a> ggVG
 
+" "w" in normal-mode for saving
+nnoremap w :w<CR>
+
 " Linux - ":W" for su-write
 " Source 1: https://vim.fandom.com/wiki/Su-write
 " Source 2: https://stackoverflow.com/questions/2600783/how-does-the-vim-write-with-sudo-trick-work
@@ -249,11 +255,20 @@ noremap <C-t> :tabn<CR>
 " "A-t" for switching tabs in reverse order
 noremap <A-t> :tabp<CR>
 
+" "'" is my leader character, not "\"
+let mapleader="'"
+
 " "\q" exit discarding changes
 nmap <leader>q <Esc>:q!<CR>
 
 " "\qa" exit closing everything and discarding changes
 nmap <leader>qa <Esc>:qa!<CR>
+
+" "\v" for selecting vertical
+noremap <leader>v <Esc><C-v>
+
+" "\'" Toggle show listchars characters
+noremap <leader>' <Esc>:set list!<CR>
 
 " Go to tab by number
 noremap <leader>1 1gt
