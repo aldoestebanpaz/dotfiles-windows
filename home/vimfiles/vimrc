@@ -50,6 +50,11 @@ set incsearch
 " tags -- 'hlsearch' 'hls'
 set hlsearch
 
+" Al searches will be case insensitive
+set ignorecase
+" Searchs will be case sensitive if it contains an uppercase letter
+set smartcase
+
 " No backup files
 " Source: https://vim.fandom.com/wiki/Remove_swap_and_backup_files_from_your_working_directory
 set nobackup

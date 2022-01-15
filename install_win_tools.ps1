@@ -183,6 +183,12 @@ $chocoPackages = @(
     [pscustomobject]@{ Name="Fira Code (a monospaced font with programming ligatures)"; Id="firacode" }
     # Source Code Pro (https://github.com/adobe-fonts/source-code-pro)
     [pscustomobject]@{ Name="Source Code Pro (a set of OpenType fonts designed for better reading in GUIs)"; Id="sourcecodepro" }
+
+    ## Misc
+    ## -----------------------
+    # Telegram (https://desktop.telegram.org/)
+    # Cloud-based synchronized messaging app with a focus on speed and security
+    [pscustomobject]@{ Name="Telegram"; Id="telegram" }
 )
 if (which choco) {
     Foreach ($p in $chocoPackages)
