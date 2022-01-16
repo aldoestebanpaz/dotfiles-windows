@@ -189,6 +189,9 @@ $chocoPackages = @(
     # Telegram (https://desktop.telegram.org/)
     # Cloud-based synchronized messaging app with a focus on speed and security
     [pscustomobject]@{ Name="Telegram"; Id="telegram" }
+    # HxD (https://mh-nexus.de/en/hxd/)
+    # A hex editor
+    [pscustomobject]@{ Name="HxD"; Id="hxd" }
 )
 if (which choco) {
     Foreach ($p in $chocoPackages)

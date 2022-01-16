@@ -200,9 +200,6 @@ syntax on
 " Select all file content in normal-mode
 nnoremap <C-a> ggVG
 
-" "w" in normal-mode for saving
-nnoremap w :w<CR>
-
 " Linux - ":W" for su-write
 " Source 1: https://vim.fandom.com/wiki/Su-write
 " Source 2: https://stackoverflow.com/questions/2600783/how-does-the-vim-write-with-sudo-trick-work
@@ -226,6 +223,9 @@ nnoremap w :w<CR>
 " maps CTRL-X, CTRL-C, CTRL-V and CTRL-Z like in Windows.
 " tags -- mxwin.vim
 source $VIMRUNTIME/mswin.vim
+
+" "w" in normal-mode for saving
+noremap w :w<CR>
 
 " "C-s" for saving changes; this works in Windows Terminal at least.
 " Ctrl-S is a common command to terminals to stop updating, it was a way to slow

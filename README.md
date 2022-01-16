@@ -115,7 +115,7 @@ Reference: https://github.com/dandavison/delta
 
 ## TODOS
 
-- Install and configure .NET SDK, Java SE (JDK), maven, MSYS2, Ruby, perl, vim or neovim or gvim.
+- Install and configure .NET SDK, Java SE (JDK), maven, MSYS2, Ruby, perl.
 
 ## References
 
