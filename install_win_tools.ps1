@@ -221,9 +221,11 @@ if (which code) {
         ## Miscellaneous
         ## -----------------------
         # Trailing Spaces (https://github.com/shardulm94/vscode-trailingspaces)
-        [pscustomobject]@{ Name="sysinternals"; Id="shardulm94.trailing-spaces" }
+        [pscustomobject]@{ Name="Trailing Spaces"; Id="shardulm94.trailing-spaces" }
         # Diff Tool (https://github.com/jinsihou19/vscode-diff-tool)
         [pscustomobject]@{ Name="Diff Tool"; Id="jinsihou.diff-tool" }
+        # Markdown All in One (https://github.com/yzhang-gh/vscode-markdown)
+        [pscustomobject]@{ Name="Markdown All in One"; Id="yzhang.markdown-all-in-one" }
     )
     Foreach ($p in $vscodePackages)
     {
