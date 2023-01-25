@@ -82,8 +82,10 @@ Write-Host "# winget packages" -ForegroundColor "Yellow"
 $wingetPackages = @(
     ## Miscellaneous tools
     ## -----------------------
-    # Greenshot (https://getgreenshot.org/)
-    [pscustomobject]@{ Name="Greenshot"; Id="Greenshot.Greenshot" }
+    # Greenshot (https://getgreenshot.org/) - I replaced it by LightShot
+    # [pscustomobject]@{ Name="Greenshot"; Id="Greenshot.Greenshot" }
+    # LightShot (https://app.prntscr.com/)
+    [pscustomobject]@{ Name="LightShot"; Id="Skillbrains.Lightshot" }
     # 7-Zip (https://www.7-zip.org/)
     [pscustomobject]@{ Name="7zip"; Id="7zip.7zip" }
     # GIMP (https://www.gimp.org/)
