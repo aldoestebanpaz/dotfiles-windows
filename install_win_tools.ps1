@@ -60,79 +60,8 @@ else {
     Write-Host "`"Chocolatey`" found." -ForegroundColor "Yellow"
 }
 
-# Windows Package Manager Client (aka winget.exe) (https://github.com/microsoft/winget-cli)
-if(-not (Get-AppxPackage -Name "Microsoft.DesktopAppInstaller")) {
-    Write-Host "Installing `"winget`"..." -ForegroundColor "Yellow"
-    ## * To install the latest stable release,
-    ## go to https://github.com/microsoft/winget-cli/releases
-    ## and search for the relase with the "Latest"
-    ## * The -UseBasicParsing parameter is included for backwards compatibility only
-    ## and any use of it has no effect on the operation of the cmdlet
-    &Invoke-WebRequest `
-        -Uri "https://github.com/microsoft/winget-cli/releases/download/v1.1.12653/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" `
-        -OutFile "$tempdir\winget-cli.msixbundle" `
-        -UseBasicParsing
-    Add-AppxPackage -Path "$tempdir\winget-cli.msixbundle"
-}
-else {
-    Write-Host "`"winget`" found." -ForegroundColor "Yellow"
-}
-
-Write-Host "# winget packages" -ForegroundColor "Yellow"
-$wingetPackages = @(
-    ## Miscellaneous tools
-    ## -----------------------
-    # Greenshot (https://getgreenshot.org/) - I replaced it by LightShot
-    # [pscustomobject]@{ Name="Greenshot"; Id="Greenshot.Greenshot" }
-    # LightShot (https://app.prntscr.com/)
-    [pscustomobject]@{ Name="LightShot"; Id="Skillbrains.Lightshot" }
-    # 7-Zip (https://www.7-zip.org/)
-    [pscustomobject]@{ Name="7zip"; Id="7zip.7zip" }
-    # GIMP (https://www.gimp.org/)
-    [pscustomobject]@{ Name="GIMP"; Id="GIMP.GIMP" }
-    # Google Chrome (https://www.google.com/chrome/)
-    [pscustomobject]@{ Name="Chrome"; Id="Google.Chrome" }
-    # VLC Media Player (https://www.videolan.org/)
-    [pscustomobject]@{ Name="VLC"; Id="VideoLAN.VLC" }
-    # Mixxx (https://www.mixxx.org/)
-    # [pscustomobject]@{ Name="MiXXX"; Id="MiXXX.MiXXX" }
-    # qBittorrent (https://www.qbittorrent.org/)
-    [pscustomobject]@{ Name="qBittorrent"; Id="qBittorrent.qBittorrent" }
-
-    ## CLI tools
-    ## -----------------------
-    # Windows Terminal (https://github.com/Microsoft/Terminal)
-    [pscustomobject]@{ Name="Windows Terminal"; Id="Microsoft.WindowsTerminal" }
-
-    ## Dev tools
-    ## -----------------------
-    # WinMerge (https://winmerge.org/)
-    [pscustomobject]@{ Name="WinMerge (an Open Source differencing and merging tool for Windows)"; Id="WinMerge.WinMerge" }
-    # Microsoft Visual Studio Code (https://code.visualstudio.com/)
-    [pscustomobject]@{ Name="vscode"; Id="Microsoft.VisualStudioCode" }
-    # Git (https://gitforwindows.org/)
-    [pscustomobject]@{ Name="Git"; Id="Git.Git" }
-    # Postman (https://www.postman.com/)
-    [pscustomobject]@{ Name="Postman"; Id="Postman.Postman" }
-    # Python (https://www.python.org/)
-    [pscustomobject]@{ Name="Python 3"; Id="Python.Python.3" }
-    # .NET SDK (https://dot.net/, https://docs.microsoft.com/en-us/dotnet/, https://docs.microsoft.com/en-us/dotnet/core/sdk, https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-install-script)
-    [pscustomobject]@{ Name=".NET SDK"; Id="Microsoft.dotnet" }
-)
-if (which winget) {
-    Foreach ($p in $wingetPackages)
-    {
-        winget list --exact --id $p.Id | Out-Null
-        if(-not $?) {
-            Write-Host "Installing `"$($p.Name)`"..." -ForegroundColor "Yellow"
-            winget install --exact --id $p.Id
-        }
-        else {
-            Write-Host "`"$($p.Name)`" found." -ForegroundColor "Yellow"
-        }
-    }
-}
-Remove-Variable wingetPackages
+# Install Winget
+.\misc\winget\install
 
 Write-Host "# chocolatey packages" -ForegroundColor "Yellow"
 $chocoPackages = @(
@@ -214,26 +143,18 @@ Refresh-Environment
 
 # Invoke-Expression -Command ""
 
-# vscode setup
-if (which code) {
-    Write-Host "# vscode extensions" -ForegroundColor "Yellow"
-    $vscodePackages = @(
-        ## Miscellaneous
-        ## -----------------------
-        # Trailing Spaces (https://github.com/shardulm94/vscode-trailingspaces)
-        [pscustomobject]@{ Name="Trailing Spaces"; Id="shardulm94.trailing-spaces" }
-        # Diff Tool (https://github.com/jinsihou19/vscode-diff-tool)
-        [pscustomobject]@{ Name="Diff Tool"; Id="jinsihou.diff-tool" }
-        # Markdown All in One (https://github.com/yzhang-gh/vscode-markdown)
-        [pscustomobject]@{ Name="Markdown All in One"; Id="yzhang.markdown-all-in-one" }
-    )
-    Foreach ($p in $vscodePackages)
-    {
-        Write-Host "Installing `"$($p.Name)`"..." -ForegroundColor "Yellow"
-        code --install-extension $p.Id
-    }
-    Remove-Variable vscodePackages
-}
+# vscode extensions
+$vscodePackages = @(
+    ## Miscellaneous
+    ## -----------------------
+    # Trailing Spaces (https://github.com/shardulm94/vscode-trailingspaces)
+    [pscustomobject]@{ Name="Trailing Spaces"; Id="shardulm94.trailing-spaces" }
+    # Diff Tool (https://github.com/jinsihou19/vscode-diff-tool)
+    [pscustomobject]@{ Name="Diff Tool"; Id="jinsihou.diff-tool" }
+    # Markdown All in One (https://github.com/yzhang-gh/vscode-markdown)
+    [pscustomobject]@{ Name="Markdown All in One"; Id="yzhang.markdown-all-in-one" }
+)
+.\misc\vscode\install_extensions.ps1 -Extensions $vscodeExtensions
 
 
 # NodeJS setup

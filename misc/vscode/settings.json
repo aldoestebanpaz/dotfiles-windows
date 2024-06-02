@@ -1,7 +1,5 @@
 {
-    "editor.fontFamily": "Fira Code Retina",
-    "editor.fontWeight": "450",
-    "editor.fontLigatures": true,
+    "explorer.confirmDelete": false,
     "editor.rulers": [
         {
             "column": 80,
@@ -14,6 +12,21 @@
         {
             "column": 120,
             "color": "#ff88003b"
-        },
-    ]
+        }
+    ],
+    // "editor.rulers": [
+    //     80,
+    //     120
+    // ],
+    "breadcrumbs.enabled": true,
+    "editor.fontFamily": "Fira Code Retina",
+    //"editor.fontWeight": "450",
+    "editor.fontLigatures": true,
+    "editor.linkedEditing": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": true,
+    "workbench.tree.enableStickyScroll": true,
+    "editor.stickyScroll.scrollWithEditor": true,
+    "editor.cursorBlinking": "smooth",
+    "editor.cursorSmoothCaretAnimation": "on"
 }
