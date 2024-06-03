@@ -153,6 +153,8 @@ $vscodePackages = @(
     [pscustomobject]@{ Name="Diff Tool"; Id="jinsihou.diff-tool" }
     # Markdown All in One (https://github.com/yzhang-gh/vscode-markdown)
     [pscustomobject]@{ Name="Markdown All in One"; Id="yzhang.markdown-all-in-one" }
+    # Display the bundle size of npm packages (https://github.com/ambar/vscode-bundle-size)
+    [pscustomobject]@{ Name="Bundle Size"; Id="ambar.bundle-size" }
 )
 .\misc\vscode\install_extensions.ps1 -Extensions $vscodeExtensions
 
