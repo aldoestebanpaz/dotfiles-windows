@@ -11,4 +11,6 @@
     { "key": "ctrl+shift+pagedown", "command": "cursorColumnSelectPageDown", "when": "textInputFocus" },
     { "key": "ctrl+shift+pageup", "command": "cursorColumnSelectPageUp", "when": "textInputFocus" },
     { "key": "ctrl+shift+left", "command": "cursorWordLeftSelect", "when": "textInputFocus && !accessibilityModeEnabled" },
+    { "key": "ctrl+r", "command": "toggleFindRegex", "when": "editorFocus" },
+    { "key": "ctrl+r", "command": "runCommands", "args": { "commands": [ "actions.find", "toggleFindRegex" ] }, "when": "editorFocus || editorIsOpen" }
 ]

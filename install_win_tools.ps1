@@ -155,6 +155,8 @@ $vscodePackages = @(
     [pscustomobject]@{ Name="Markdown All in One"; Id="yzhang.markdown-all-in-one" }
     # Display the bundle size of npm packages (https://github.com/ambar/vscode-bundle-size)
     [pscustomobject]@{ Name="Bundle Size"; Id="ambar.bundle-size" }
+    # An interactive git graph viewer (https://github.com/mhutchie/vscode-git-graph)
+    [pscustomobject]@{ Name="Git Graph"; Id="mhutchie.git-graph" }
 )
 .\misc\vscode\install_extensions.ps1 -Extensions $vscodeExtensions
 
